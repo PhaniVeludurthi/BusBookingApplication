@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusBooking.Models\BusBooking.Models.csproj" />
+    <ProjectReference Include="..\BusBooking.Repositoty\BusBooking.Repositoty.csproj" />
+    <ProjectReference Include="..\BusBooking.Utilities\BusBooking.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>
