@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace BusBooking.Models
 {
-    public class SignUpVM
+    public class SeatDetailVM
     {
-        public SignUpVM()
+        public SeatDetailVM()
         {
             BookingDetails = new HashSet<BookingDetail>();
         }
 
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public int SeatDetailId { get; set; }
+        public string SeatType { get; set; }
+        public int SeatPrice { get; set; }
+        public bool SeatDetailStatus { get; set; }
 
         public virtual ICollection<BookingDetail> BookingDetails { get; set; }
     }

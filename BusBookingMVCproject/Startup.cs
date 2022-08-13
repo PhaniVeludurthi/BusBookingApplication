@@ -2,6 +2,7 @@ using BusBooking.Business;
 using BusBooking.Business.Interface;
 using BusBooking.Repositoty;
 using BusBooking.Repositoty.Interface;
+using BusBooking.Repositoty.Models;
 using BusBooking.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,8 +30,8 @@ namespace BusBookingMVCproject
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration["ConnectionStrings:DefaultConnection"];
-           /* services.AddDbContext<>(options => options.UseSqlServer(connectionString));
-            services.AddDbContext<>(options => options.UseSqlServer(connectionString));*/
+            services.AddDbContext<BusBookingContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));
 
             services.AddTransient<IBusBookingBusiness, BusBookingBusiness>();
             services.AddTransient<IBusBookingRepository, BusBookingRepository>();

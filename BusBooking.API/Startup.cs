@@ -2,11 +2,13 @@ using BusBooking.Business;
 using BusBooking.Business.Interface;
 using BusBooking.Repositoty;
 using BusBooking.Repositoty.Interface;
+using BusBooking.Repositoty.Models;
 using BusBooking.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,11 +35,12 @@ namespace BusBooking.API
         {
             string connectionString = Configuration["ConnectionStrings:DefaultConnection"];
 
-            /*services.AddDbContext<NextTurnDBContext>(options => options.UseSqlServer(connectionString));
-            services.AddDbContext<Mycontext>(options => options.UseSqlServer(connectionString));*/
+            services.AddDbContext<BusBookingContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));
 
             services.AddTransient<IBusBookingBusiness, BusBookingBusiness>();
             services.AddTransient<IBusBookingRepository, BusBookingRepository>();
+
 
             //Automapper
             services.AddAutoMapper(typeof(AutoMappingConfig));
@@ -60,7 +63,7 @@ namespace BusBooking.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BusBooking.API v1"));
             }
-
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();

@@ -1,15 +1,13 @@
-﻿using BusBooking.Repositoty;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BusBooking.Models
+#nullable disable
+
+namespace BusBooking.Repositoty
 {
-    public class PickupStandVM
+    public partial class PickupStand
     {
-        public PickupStandVM()
+        public PickupStand()
         {
             RouteDetails = new HashSet<RouteDetail>();
         }
