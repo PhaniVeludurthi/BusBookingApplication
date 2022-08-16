@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BusBooking.Repositoty
+namespace BusBooking.Repositoty.Models
 {
     public partial class SignUp
     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +18,9 @@ namespace BusBooking.Repositoty.Interface
         Task<List<FilterByPriceLesser1k>> FilterByPriceLesser1k(string? Origin, string? Destination);
         Task<List<FilterByPriceGreater1k>> FilterByPriceGreater1k(string? Origin, string? Destination);
         Task<List<BookingSummary>> GetBookingDetailsByMobileNo(string? MobileNo);
+    Task<List<RoutePoints>> GetRoutePointsbyID(string? Origin, string? Destination, int? BusID);
+    Task<List<BusDetailsbyID>> GetBusDetailsbyIDs(int? BusId);
+    Task<BookingDetail> Booking(BookingDetail book);
+    Task<SignUp> Register(SignUp Reg);
     }
 }

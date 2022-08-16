@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace BusBooking.Repositoty
+namespace BusBooking.Repositoty.Models
 {
     public partial class BusBookingContext : DbContext
     {
@@ -22,7 +22,6 @@ namespace BusBooking.Repositoty
         public virtual DbSet<PickupStand> PickupStands { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<RouteDetail> RouteDetails { get; set; }
-        public virtual DbSet<SeatDetail> SeatDetails { get; set; }
         public virtual DbSet<SignUp> SignUps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,7 +29,7 @@ namespace BusBooking.Repositoty
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=BusBooking;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source =(localdb)\\MSSQLLocalDB;Initial Catalog=BusBooking; Integrated Security=true");
             }
         }
 
@@ -40,51 +39,47 @@ namespace BusBooking.Repositoty
             {
                 entity.HasKey(e => e.BookingId);
 
+                entity.ToTable("BookingDetail");
+
                 entity.Property(e => e.BookingId).HasColumnName("BookingID");
 
                 entity.Property(e => e.BusId).HasColumnName("BusID");
 
                 entity.Property(e => e.Gender)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MobileNo)
-                    .IsRequired()
                     .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("MobileNO");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RouteId).HasColumnName("RouteID");
+                entity.Property(e => e.SeatNumber)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.SeatDetailId).HasColumnName("SeatDetailID");
+                entity.Property(e => e.SeatType)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TravelDate).HasColumnType("date");
+                entity.Property(e => e.TravelDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.Route)
+                entity.HasOne(d => d.Bus)
                     .WithMany(p => p.BookingDetails)
-                    .HasForeignKey(d => d.RouteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BookingDetails_Routes");
-
-                entity.HasOne(d => d.SeatDetail)
-                    .WithMany(p => p.BookingDetails)
-                    .HasForeignKey(d => d.SeatDetailId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BookingDetails_SeatDetails");
+                    .HasForeignKey(d => d.BusId)
+                    .HasConstraintName("FK_BookingDetail_BusDetails");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BookingDetails)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_BookingDetails_SignUP");
+                    .HasConstraintName("FK_BookingDetail_SignUP");
             });
 
             modelBuilder.Entity<BusDetail>(entity =>
@@ -187,16 +182,6 @@ namespace BusBooking.Repositoty
                     .HasForeignKey(d => d.RouteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RouteDetails_Routes");
-            });
-
-            modelBuilder.Entity<SeatDetail>(entity =>
-            {
-                entity.Property(e => e.SeatDetailId).HasColumnName("SeatDetailID");
-
-                entity.Property(e => e.SeatType)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<SignUp>(entity =>
