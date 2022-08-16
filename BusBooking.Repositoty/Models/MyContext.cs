@@ -1,4 +1,4 @@
-﻿using BusBooking.Repositoty.ViewModels;
+using BusBooking.Repositoty.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,5 +26,7 @@ namespace BusBooking.Repositoty.Models
         public virtual DbSet<FilterByPriceLesser1k> FilterByPriceLesserthan1k { get; set; }
         public virtual DbSet<FilterByPriceGreater1k> FilterByPriceGreaterthan1k { get; set; }
         public virtual DbSet<BookingSummary> GetBookingSummaries { get; set; }
-    }
+        public virtual DbSet<RoutePoints> GetRoutePointsbyID { get; set; }
+    public virtual DbSet<BusDetailsbyID> GetBusDetailsbyID { get; set; }
+  }
 }

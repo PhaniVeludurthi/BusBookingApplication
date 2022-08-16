@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BusBooking.Repositoty
+namespace BusBooking.Repositoty.Models
 {
     public partial class BusDetail
     {
         public BusDetail()
         {
+            BookingDetails = new HashSet<BookingDetail>();
             PickupStands = new HashSet<PickupStand>();
         }
 
@@ -23,6 +24,7 @@ namespace BusBooking.Repositoty
         public int? SeatRows { get; set; }
         public int? BusPrice { get; set; }
 
+        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
         public virtual ICollection<PickupStand> PickupStands { get; set; }
     }
 }

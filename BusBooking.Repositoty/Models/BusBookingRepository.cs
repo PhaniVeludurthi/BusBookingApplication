@@ -1,4 +1,4 @@
-﻿using BusBooking.Repositoty.Interface;
+using BusBooking.Repositoty.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,8 +60,31 @@ namespace BusBooking.Repositoty
             var result = await _myContext.GetBookingSummaries.FromSqlRaw("exec GetBookingDetailsByMobileNo {0}", MobileNo).ToListAsync();
             return result;
         }
-
-
+    public async Task<List<RoutePoints>> GetRoutePointsbyID(string? Origin, string? Destination, int? BusID)
+    {
+      var result = await _myContext.GetRoutePointsbyID.FromSqlRaw("GetRoutepointsByID {0},{1},{2}", Origin, Destination, BusID).ToListAsync();
+      return result;
 
     }
+    public async Task<List<BusDetailsbyID>> GetBusDetailsbyIDs(int? BusId)
+    {
+      var result = await _myContext.GetBusDetailsbyID.FromSqlRaw("GetBusDetailbyID {0}", BusId).ToListAsync();
+      return result;
+    }
+    public async Task<BookingDetail> Booking(BookingDetail book)
+    {
+      var result = await _myContext.BookingDetails.AddAsync(book);
+      await _myContext.SaveChangesAsync();
+      return result.Entity;
+    }
+    public async Task<SignUp> Register(SignUp Reg)
+    {
+      var result = await _myContext.SignUps.AddAsync(Reg);
+      await _myContext.SaveChangesAsync();
+      return result.Entity;
+    }
+
+
+
+  }
 }

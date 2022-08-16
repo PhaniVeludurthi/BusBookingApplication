@@ -1,4 +1,4 @@
-﻿using BusBooking.Business.Interface;
+using BusBooking.Business.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ using BusBooking.Models;
 using BusBooking.Repositoty.ViewModels;
 using BusBooking.Models.NewFolder;
 using BusBooking.Models.StoredProcedureModels;
+using BusBooking.Repositoty.Models;
 
 namespace BusBooking.Business
 {
@@ -63,6 +64,27 @@ namespace BusBooking.Business
             var list = await _BusBookingRepository.GetBookingDetailsByMobileNo(MobileNo);
             return _mapper.Map<List<BookingSummaryVM>>(list);
         }
-
+    public async Task<List<RoutePointsVM>> GetRoutePointsbyID(string? Origin, string? Destination, int? BusID)
+    {
+      var list = await _BusBookingRepository.GetRoutePointsbyID(Origin,Destination,BusID);
+      return _mapper.Map<List<RoutePointsVM>>(list);
     }
+    public async Task<List<BusDetailsbyIDVM>> GetBusDetailsbyIDs(int? BusId)
+    {
+      var list = await _BusBookingRepository.GetBusDetailsbyIDs(BusId);
+      return _mapper.Map<List<BusDetailsbyIDVM>>(list);
+    }
+    public async Task<BookingDetailVM> Booking(BookingDetailVM book)
+    {
+      var list = await _BusBookingRepository.Booking(_mapper.Map<BookingDetail>(book));
+      return _mapper.Map<BookingDetailVM>(list);
+    }
+    public async Task<SignUpVM> Register(SignUpVM Reg)
+    {
+      var list = await _BusBookingRepository.Register(_mapper.Map<SignUp>(Reg));
+      return _mapper.Map<SignUpVM>(list);
+    }
+
+
+  }
 }

@@ -1,4 +1,5 @@
-﻿using BusBooking.Repositoty;
+using BusBooking.Repositoty;
+using BusBooking.Repositoty.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BusBooking.Models
     {
         public SeatDetailVM()
         {
-            BookingDetails = new HashSet<BookingDetail>();
+           /* BookingDetails = new HashSet<BookingDetail>();*/
         }
 
         public int SeatDetailId { get; set; }
@@ -19,6 +20,6 @@ namespace BusBooking.Models
         public int SeatPrice { get; set; }
         public bool SeatDetailStatus { get; set; }
 
-        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
+       /* public virtual ICollection<BookingDetail> BookingDetails { get; set; }*/
     }
 }

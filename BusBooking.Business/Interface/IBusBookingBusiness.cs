@@ -1,6 +1,7 @@
-﻿using BusBooking.Models;
+using BusBooking.Models;
 using BusBooking.Models.NewFolder;
 using BusBooking.Models.StoredProcedureModels;
+using BusBooking.Repositoty.Models;
 using BusBooking.Repositoty.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,9 @@ namespace BusBooking.Business.Interface
         Task<List<FilterByPriceLesser1kVM>> FilterByPriceLesser1k(string? Origin, string? Destination);
         Task<List<FilterByPriceGreater1kVM>> FilterByPriceGreater1k(string? Origin, string? Destination);
         Task<List<BookingSummaryVM>> GetBookingDetailsByMobileNo(string? MobileNo);
-    }
+    Task<List<RoutePointsVM>> GetRoutePointsbyID(string? Origin, string? Destination, int? BusID);
+    Task<List<BusDetailsbyIDVM>> GetBusDetailsbyIDs(int? BusId);
+    Task<BookingDetailVM> Booking(BookingDetailVM book);
+    Task<SignUpVM> Register(SignUpVM Reg);
+  }
 }

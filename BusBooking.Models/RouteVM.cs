@@ -1,4 +1,5 @@
-﻿using BusBooking.Repositoty;
+using BusBooking.Repositoty;
+using BusBooking.Repositoty.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace BusBooking.Models
         {
             public Route()
             {
-                BookingDetails = new HashSet<BookingDetail>();
+                /*BookingDetails = new HashSet<BookingDetail>();*/
                 PickupStands = new HashSet<PickupStand>();
                 RouteDetails = new HashSet<RouteDetail>();
             }
@@ -23,7 +24,7 @@ namespace BusBooking.Models
             public string Destination { get; set; }
             public bool RoutesStatus { get; set; }
 
-            public virtual ICollection<BookingDetail> BookingDetails { get; set; }
+            /*public virtual ICollection<BookingDetail> BookingDetails { get; set; }*/
             public virtual ICollection<PickupStand> PickupStands { get; set; }
             public virtual ICollection<RouteDetail> RouteDetails { get; set; }
         }
